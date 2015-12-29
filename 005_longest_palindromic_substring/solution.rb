@@ -27,8 +27,7 @@ def longest_palindrome(s)
   max_right = 0
 
   # pass 1st and last
-  l = ns.length - 1
-  while i < l do
+  while i < ns.length - 1 do
     len = 0
     if i < max_right
       len = [size[2 * max_center - i], (max_right - i)].min
