@@ -35,3 +35,6 @@ build/
 .rvmrc
 
 .byebug_history
+
+# tmp file
+tmp*
