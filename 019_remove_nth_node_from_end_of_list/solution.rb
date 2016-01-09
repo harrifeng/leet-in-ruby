@@ -31,6 +31,9 @@ class MyTest < Test::Unit::TestCase
   end
 end
 
+# @param {ListNode} head
+# @param {Integer} n
+# @return {ListNode}
 def remove_nth_from_end(head, n)
   tmp = head
   tmp2 = head
