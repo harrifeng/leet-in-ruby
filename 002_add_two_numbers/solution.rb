@@ -1,12 +1,5 @@
 require 'test/unit'
-
-class ListNode
-  attr_accessor :val, :next
-  def initialize(val)
-    @val = val
-    @next = nil
-  end
-end
+require_relative '../util/list_node'
 
 class MyTest < Test::Unit::TestCase
   def setup
@@ -15,34 +8,11 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def assert_equal_list(l1, l2)
-    a1 = []
-    a2 = []
-    while l1 != nil do
-      a1.push l1.val
-      l1 = l1.next
-    end
-    while l2 != nil do
-      a2.push l2.val
-      l2 = l2.next
-    end
-    assert_equal a1, a2
-  end
-
   def test_leet_function
-    @first = ListNode.new(2)
-    @first.next = ListNode.new(4)
-    @first.next.next = ListNode.new(3)
-
-    @second = ListNode.new(5)
-    @second.next = ListNode.new(6)
-    @second.next.next = ListNode.new(4)
-
-    @result = ListNode.new(7)
-    @result.next = ListNode.new(0)
-    @result.next.next = ListNode.new(8)
-
-    assert_equal_list @result,  add_two_numbers(@first, @second)
+    first = array_to_list([2, 4, 3])
+    second = array_to_list([5, 6, 4])
+    result = array_to_list([7, 0, 8])
+    assert_equal_list result,  add_two_numbers(first, second)
   end
 end
 
