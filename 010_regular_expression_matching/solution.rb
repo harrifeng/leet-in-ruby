@@ -8,13 +8,13 @@ class MyTest < Test::Unit::TestCase
   end
 
   def test_leet_function
-    assert_true is_match("aa", "aa")
-    assert_true is_match("aa", "a*")
-    assert_true is_match("aa", ".*")
-    assert_true is_match("ab", ".*")
-    assert_true is_match("aab", "c*a*b")
-    assert_false is_match("aa", "a")
-    assert_false is_match("aaaaaaaaaaaaab","a*a*a*a*a*a*a*a*a*a*c")
+    assert is_match("aa", "aa")
+    assert is_match("aa", "a*")
+    assert is_match("aa", ".*")
+    assert is_match("ab", ".*")
+    assert is_match("aab", "c*a*b")
+    assert !is_match("aa", "a")
+    assert !is_match("aaaaaaaaaaaaab","a*a*a*a*a*a*a*a*a*a*c")
   end
 end
 

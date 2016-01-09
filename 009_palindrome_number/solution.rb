@@ -8,9 +8,9 @@ class MyTest < Test::Unit::TestCase
   end
 
   def test_leet_function
-    assert_true is_palindrome(2332)
-    assert_true is_palindrome(20002)
-    assert_false is_palindrome(-2332)
+    assert is_palindrome(2332)
+    assert is_palindrome(20002)
+    assert !is_palindrome(-2332)
   end
 end
 

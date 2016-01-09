@@ -9,9 +9,9 @@ class MyTest < Test::Unit::TestCase
   end
 
   def test_leet_function
-    assert_equal true, is_valid("()[]{}")
-    assert_equal true, is_valid("()[]{({})}")
-    assert_equal false, is_valid("(()[]{({})}")
+    assert is_valid("()[]{}")
+    assert is_valid("()[]{({})}")
+    assert !is_valid("(()[]{({})}")
   end
 end
 
