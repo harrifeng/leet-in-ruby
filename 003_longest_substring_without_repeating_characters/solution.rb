@@ -7,7 +7,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal 12, length_of_longest_substring("wlrbbmqbhcdarzowkkyhiddqscdxrjmowfrxsjybldbefsarcbynecdyggxxpklorellnmpapqfwkhopkmco")
     assert_equal 3, length_of_longest_substring("abcabcbb")
     assert_equal 2, length_of_longest_substring("aab")

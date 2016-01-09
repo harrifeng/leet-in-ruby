@@ -8,7 +8,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal 1,      roman_to_int("I")
     assert_equal 2,      roman_to_int("II")
     assert_equal 3,      roman_to_int("III")

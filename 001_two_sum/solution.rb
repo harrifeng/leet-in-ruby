@@ -7,7 +7,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal [1, 2],  two_sum([2, 7, 11, 15], 9)
   end
 end

@@ -7,7 +7,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal 0, max_area([1])
     assert_equal 45, max_area([1,1, 2, 3, 4, 15, 4, 2, 19, 8])
   end

@@ -42,7 +42,7 @@ class MyTest < Test::Unit::TestCase
     return tmp
   end
 
-  def test_add_two_numbers
+  def test_leet_function
     h1 = array_to_list([1, 2, 3, 4, 5])
     r1 = array_to_list([1, 2, 3, 5])
     assert_equal_list r1,  remove_nth_from_end(h1, 2)

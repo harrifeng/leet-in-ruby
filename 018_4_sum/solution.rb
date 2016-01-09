@@ -8,7 +8,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal [[-1, 0, 0,1],[-2, -1, 1,2], [-2, 0, 0, 2]].sort, four_sum([1, 0, -1, 0, -2, 2], 0).sort
   end
 end

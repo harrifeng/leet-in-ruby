@@ -29,7 +29,7 @@ class MyTest < Test::Unit::TestCase
     assert_equal a1, a2
   end
 
-  def test_add_two_numbers
+  def test_leet_function
     @first = ListNode.new(2)
     @first.next = ListNode.new(4)
     @first.next.next = ListNode.new(3)

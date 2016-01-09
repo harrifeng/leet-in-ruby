@@ -7,7 +7,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     delta = 0.00001
     assert_in_delta 1.0, find_median_sorted_arrays([1,2], [1, 1]), delta
     assert_in_delta 2.5, find_median_sorted_arrays([], [2, 3]), delta

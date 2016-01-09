@@ -7,7 +7,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal 1234, my_atoi("1234")
     assert_equal 0, my_atoi("+-2")
     assert_equal -1, my_atoi("-1")

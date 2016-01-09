@@ -8,7 +8,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"], letter_combinations("23")
   end
 end

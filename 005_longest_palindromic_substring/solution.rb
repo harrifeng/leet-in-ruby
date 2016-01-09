@@ -7,7 +7,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal "abccba", longest_palindrome("abccbaaaa")
     assert_equal "cc", longest_palindrome("ccd")
     assert_equal "bb", longest_palindrome("abb")

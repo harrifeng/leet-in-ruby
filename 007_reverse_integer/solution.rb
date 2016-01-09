@@ -7,7 +7,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal 123, reverse(321)
     assert_equal -123, reverse(-321)
     assert_equal 2 ** 31 -1, reverse(7463847412)

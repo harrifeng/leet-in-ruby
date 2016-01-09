@@ -8,7 +8,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal "ab", longest_common_prefix(["abcd", "abccc", "abbbb"])
     assert_equal "wab", longest_common_prefix(["wabcdsssc", "wabccc", "wabbbb"])
   end

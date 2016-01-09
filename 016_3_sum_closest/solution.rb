@@ -8,7 +8,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal 2, three_sum_closest([-1, 2, 1, -4], 1)
   end
 end

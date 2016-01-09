@@ -8,7 +8,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal true, is_valid("()[]{}")
     assert_equal true, is_valid("()[]{({})}")
     assert_equal false, is_valid("(()[]{({})}")

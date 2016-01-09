@@ -7,7 +7,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_equal "PAHNAPLSIIGYIR", convert("PAYPALISHIRING", 3)
     assert_equal "A", convert("A", 1)
     assert_equal "ACB", convert("ABC", 2)

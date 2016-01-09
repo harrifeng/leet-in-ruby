@@ -7,7 +7,7 @@ class MyTest < Test::Unit::TestCase
   def teardown
   end
 
-  def test_two_sum
+  def test_leet_function
     assert_true is_match("aa", "aa")
     assert_true is_match("aa", "a*")
     assert_true is_match("aa", ".*")
