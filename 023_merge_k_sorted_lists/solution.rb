@@ -35,11 +35,8 @@ def merge_k_lists(lists)
     return lists[0]
   end
 
-  ret = lists[0]
-  for i in (1..lists.length-1) do
-    ret = merge_two_lists(ret, lists[i])
-  end
-  return ret
+  len = lists.length
+  return merge_two_lists(merge_k_lists(lists[0..len/2-1]), merge_k_lists(lists[len/2..len-1]))
 end
 
 
