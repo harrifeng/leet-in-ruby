@@ -18,7 +18,7 @@ class MyTest < Test::Unit::TestCase
 
   def test_leet_function
     orig = array_to_list([1, 2, 3, 4, 5])
-    r1 = array_to_list([2, 1, 3, 4, 5])
+    r1 = array_to_list([2, 1, 4, 3, 5])
     assert_equal_list r1,  reverse_k_group(orig, 2)
 
     orig = array_to_list([1, 2, 3, 4, 5])
@@ -26,7 +26,7 @@ class MyTest < Test::Unit::TestCase
     assert_equal_list r2,  reverse_k_group(orig, 3)
 
     orig = array_to_list([1, 2, 3, 4, 5])
-    r3 = array_to_list([4, 5, 3, 2, 1])
+    r3 = array_to_list([1, 2, 3, 4, 5])
     assert_equal_list r3,  reverse_k_group(orig, 6)
   end
 end
@@ -42,27 +42,27 @@ def reverse_k_group(head, k)
   if k == 0
     return head
   end
-  dummy_new = ListNode.new(-1)
-  # dummy_old.next is always the one to process
-  dummy_old = ListNode.new(-1)
-  dummy_old.next = head
   tmp = head
-  overlap = false
+  len = 0
+  while tmp != nil do
+    tmp = tmp.next
+    len += 1
+  end
+
+  if k > len
+    return head
+  end
+
+  dummy = ListNode.new(-1)
+  tmp = head
 
   for i in (1..k) do
-    if dummy_old.next == nil
-      dummy_old = dummy_new.next
-      overlap = true
-    end
-    current = dummy_old.next
-    dummy_old.next = current.next
+    current = head
+    head = head.next
 
-    current.next = dummy_new.next
-    dummy_new.next = current
+    current.next = dummy.next
+    dummy.next = current
   end
-
-  if !overlap
-    tmp.next = dummy_old.next
-  end
-  return dummy_new.next
+  tmp.next = reverse_k_group(head, k)
+  return dummy.next
 end
