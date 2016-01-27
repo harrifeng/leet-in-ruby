@@ -35,11 +35,10 @@ def do_permute(nums, level, sum)
   end
 
   for i in (level..nums.length-1) do
-    if i > level && (nums[i] == nums[level] || nums[i] == nums[i-1])
-      next
+    if i == level || !nums[level..i-1].include?(nums[i])
+      nums[i], nums[level] = nums[level], nums[i]
+      do_permute(nums, level + 1, sum)
+      nums[i], nums[level] = nums[level], nums[i]
     end
-    nums[i], nums[level] = nums[level], nums[i]
-    do_permute(nums, level + 1, sum)
-    nums[i], nums[level] = nums[level], nums[i]
   end
 end
