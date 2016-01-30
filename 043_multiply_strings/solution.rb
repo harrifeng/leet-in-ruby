@@ -8,7 +8,7 @@ class MyTest < Test::Unit::TestCase
   end
 
   def test_leet_function
-    #assert_equal "24", multiply("4", "6")
+    assert_equal "24", multiply("4", "6")
     assert_equal "2400", multiply("40", "60")
     assert_equal "0", multiply("40", "0")
     assert_equal "1", multiply("1", "1")
@@ -27,7 +27,6 @@ def multiply(num1, num2)
   num1.reverse!
   num2.reverse!
 
-  maxp = 0
   for i in (0..num1.length-1)
     for j in (0..num2.length-1)
       pos = i + j
