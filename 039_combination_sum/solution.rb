@@ -16,33 +16,29 @@ end
 # @param {Integer} target
 # @return {Integer[][]}
 def combination_sum(candidates, target)
-  mp = {}
-  candidates.each do |c|
-    mp[c] = true
-  end
-
+  candidates.sort!
   ret = []
+  do_sum(candidates, target, 0, [], ret)
+  return ret
+end
 
-  mp.keys.each do |k|
-    if k > target
-      next
-    end
-    if k == target
-      ret << [k]
-      next
-    end
-    if k < target
-      s = combination_sum(candidates, target - k)
-      for i in (0..s.length-1)
-        one = s[i].dup
-        one << k
-        one.sort!
-        if !ret.include? one
-          ret << one
-        end
-      end
-    end
+# c candidates
+# gap remining num
+# start from 0
+# tmp result
+# result final
+def do_sum(c, gap, start, tmp, result)
+  if gap == 0
+    result << tmp.dup
+    return
   end
 
-  return ret
+  for i in (start..c.length-1)
+    if gap < c[i]
+      return
+    end
+    tmp << c[i]
+    do_sum(c, gap - c[i], i, tmp, result)
+    tmp.pop
+  end
 end
