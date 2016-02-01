@@ -23,20 +23,21 @@ def combination_sum2(candidates, target)
   return ret
 end
 
-def do_com(candidates, start, gap, tmp, result)
+def do_com(c, start, gap, tmp, result)
   if gap == 0
     result << tmp.dup
     return
   end
 
-  for i in (start..candidates.length-1) do
-    if candidates[i] > gap
+  for i in (start..c.length-1) do
+    if c[i] > gap
       return
     end
-    tmp << candidates[i]
-
-    do_com(candidates, i+1, gap - candidates[i], tmp, result)
-
+    if i > 0 && c[i] == c[i-1] && tmp == []
+      next
+    end
+    tmp << c[i]
+    do_com(c, i+1, gap - c[i], tmp, result)
     tmp.pop
   end
 
