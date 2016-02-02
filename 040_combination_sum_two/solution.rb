@@ -9,6 +9,7 @@ class MyTest < Test::Unit::TestCase
 
   def test_leet_function
     assert_equal [], combination_sum2([1, 2], 4)
+    assert_equal [[2, 2]], combination_sum2([2, 2, 2], 4)
     assert_equal [[1,1,6],[1,2,5],[1,7],[2,6]].sort, combination_sum2([10,1,2,7,6,1,5], 8).sort
   end
 end
@@ -29,16 +30,17 @@ def do_com(c, start, gap, tmp, result)
     return
   end
 
+  prev = -1
   for i in (start..c.length-1) do
     if c[i] > gap
       return
     end
-    if i > 0 && c[i] == c[i-1] && tmp == []
+    if prev == c[i]
       next
     end
-    tmp << c[i]
+    prev = c[i]
+    tmp <<  c[i]
     do_com(c, i+1, gap - c[i], tmp, result)
     tmp.pop
   end
-
 end
