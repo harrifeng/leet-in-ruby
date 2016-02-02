@@ -19,54 +19,52 @@ end
 # @param {Character[][]} board
 # @return {Void} Do not return anything, modify board in-place instead.
 def solve_sudoku(board)
-  lines = []
-  columns = []
-  groups = []
-  for i in (0..8)
-    lines << []
-    columns << []
-    groups << []
-    for j in (0..8)
-      lines[i] << (j + 1).to_s
-      columns[i] << (j + 1).to_s
-      groups[i] << (j+1).to_s
-    end
-  end
-
-  for i in (0..8)
-    for j in (0..8)
-      if board[i][j] != '.'
-        lines[i].delete board[i][j]
-        columns[j].delete board[i][j]
-        groups[i/3*3+j/3].delete board[i][j]
-      end
-    end
-  end
-
-  do_sudoku(lines, columns, groups, board)
+  do_sudoku(board)
 end
 
-def do_sudoku(lines, columns, groups, board)
-  if empty_multi_array(lines) && empty_multi_array(columns) && empty_multi_array(groups)
-    return
-  end
-
+def do_sudoku(board)
   for i in (0..8)
     for j in (0..8)
       if board[i][j] == '.'
-        for k in (lines[i].length-1).downto(0) do
+        for k in (1..9) do
+          board[i][j] = k.to_s
+          if is_valid(board, i, j) && do_sudoku(board)
+            return true
           end
+          board[i][j] = '.'
+        end
+        return false
       end
     end
   end
+  return true
 end
 
+def is_valid(board, x, y)
 
-def empty_multi_array(arr)
-  arr.each do |a|
-    if !a.empty?
+  for i in (0..8) do
+    if i != x && board[i][y] == board[x][y]
       return false
     end
   end
+
+  for j in (0..8) do
+    if j != y && board[x][j] == board[x][y]
+      return false
+    end
+  end
+
+
+  a = x / 3 * 3
+  b = y / 3 * 3
+
+  for m in (a..a+2)
+    for n in (b..b+2)
+      if (m != x || n != y) && board[m][n] == board[x][y]
+        return false
+      end
+    end
+  end
+
   return true
 end
