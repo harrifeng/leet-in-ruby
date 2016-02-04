@@ -22,19 +22,30 @@ end
 # @param {String} p
 # @return {Boolean}
 def is_match(s, p)
-  if p.length == 0
-    return s.length == 0
+  i = 0
+  j = 0
+  backupS = -1
+  backupP = -1
+  while i < s.length
+    if j < p.length && (p[j] == '?' || s[i] == p[j])
+      i += 1
+      j += 1
+    elsif j < p.length && p[j] == '*'
+      j += 1
+      backupS = i
+      backupP = j
+    else
+      if backupP == -1
+        return false
+      end
+      backupS += 1
+      i = backupS
+      j = backupP
+    end
   end
 
-  if p[0] == '*'
-    if is_match(s, p[1..-1])
-      return true
-    else
-      return s.length > 0 && is_match(s[1..-1], p)
-    end
-  elsif p[0] == '?'
-    return s.length > 0 && is_match(s[1..-1], p[1..-1])
-  else
-    return s.length > 0 && p[0] == s[0] && is_match(s[1..-1], p[1..-1])
+  while j < p.length && p[j] == '*'
+    j += 1
   end
+  return j == p.length
 end
