@@ -22,7 +22,7 @@ def longest_palindrome(s)
   maxp = 0
   maxi = 0
 
-  for i in (1..t.length - 2) do
+  1.upto(t.length - 2) do |i|
     start = 1
     start = [righti - i, size[2 * centeri - i]].min if i < righti
 

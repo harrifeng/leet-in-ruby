@@ -17,12 +17,12 @@ def is_match(s, p)
   dp = Array.new(s.length + 1) { Array.new(p.length + 1, false) }
   dp[0][0] = true
 
-  for i in (2..p.length) do
+  2.upto(p.length) do |i|
     dp[0][i] = dp[0][i - 2] if p[i - 1] == '*'
   end
 
-  for i in (1..s.length) do
-    for j in (1..p.length) do
+  1.upto(s.length) do |i|
+    1.upto(p.length) do |j|
       if p[j - 1] == '.'
         dp[i][j] = dp[i - 1][j - 1]
       elsif p[j - 1] == '*'
