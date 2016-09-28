@@ -10,18 +10,18 @@ end
 
 def generate_parenthesis(n)
   ret = []
-  helper(n, n, '', ret)
+  helper_022(n, n, '', ret)
   ret
 end
 
-def helper(left, right, tmp, ret)
+def helper_022(left, right, tmp, ret)
   if left.zero? && right.zero?
     ret.push(tmp.dup)
     return
   end
 
-  helper(left - 1, right, tmp + '(', ret) if left > 0
+  helper_022(left - 1, right, tmp + '(', ret) if left > 0
 
-  helper(left, right - 1, tmp + ')', ret) if right > left
+  helper_022(left, right - 1, tmp + ')', ret) if right > left
   nil
 end
