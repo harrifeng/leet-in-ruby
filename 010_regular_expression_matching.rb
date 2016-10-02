@@ -23,13 +23,11 @@ def is_match(s, p)
 
   1.upto(s.length) do |i|
     1.upto(p.length) do |j|
-      if p[j - 1] == '.'
-        dp[i][j] = dp[i - 1][j - 1]
-      elsif p[j - 1] == '*'
+      if p[j - 1] == '*'
         dp[i][j] = dp[i][j - 1] || dp[i][j - 2] ||
                    (dp[i - 1][j] && (s[i - 1] == p[j - 2] || p[j - 2] == '.'))
       else
-        dp[i][j] = dp[i - 1][j - 1] && s[i - 1] == p[j - 1]
+        dp[i][j] = dp[i - 1][j - 1] && (s[i - 1] == p[j - 1] || p[j - 1] == '.')
       end
     end
   end
