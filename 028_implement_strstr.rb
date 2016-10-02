@@ -10,11 +10,15 @@ class MyTest < Minitest::Test
   end
 end
 
-def str_str(s, p)
+# @param {String} haystack
+# @param {String} needle
+# @return {Integer}
+def str_str(haystack, needle)
   i = 0
   j = 0
-  while i < s.length && j < p.length
-    if s[i] == p[j]
+
+  while i < haystack.length && j < needle.length
+    if haystack[i] == needle[j]
       i += 1
       j += 1
     else
@@ -22,6 +26,7 @@ def str_str(s, p)
       j = 0
     end
   end
-  return i - j if j == p.length
+
+  return i - j if j == needle.length
   -1
 end
