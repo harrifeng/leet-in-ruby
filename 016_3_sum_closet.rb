@@ -21,7 +21,7 @@ def three_sum_closest(nums, target)
 
       minv = cnt if (cnt - target).abs < (minv - target).abs
 
-      return 0 if cnt == target
+      return cnt if cnt == target
       if cnt < target
         front += 1
       else
