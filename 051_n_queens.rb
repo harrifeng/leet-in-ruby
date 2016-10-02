@@ -4,11 +4,11 @@ require 'minitest/autorun'
 class MyTest < Minitest::Test
   def test_leet_051
     assert_equal [['.Q..', '...Q', 'Q...', '..Q.'],
-                  ['..Q.', 'Q...', '...Q', '.Q..']], solve_n_queens(4)
+                  ['..Q.', 'Q...', '...Q', '.Q..']], solve_n_queens_ii(4)
   end
 end
 
-def solve_n_queens(n)
+def solve_n_queens_ii(n)
   ret = []
   helper_051(n, 0, [], ret)
   ret
