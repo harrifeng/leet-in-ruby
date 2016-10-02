@@ -16,13 +16,15 @@ class MyTest < Minitest::Test
     pr1.each do |p|
       r1.push(p.split(''))
     end
-    assert_equal r1, solve_sudoku(a1)
+    solve_sudoku(a1)
+    assert_equal r1, a1
   end
 end
 
+# @param {Character[][]} board
+# @return {Void} Do not return anything, modify board in-place instead.
 def solve_sudoku(board)
   dfs(board)
-  board
 end
 
 def board_valid?(board, x, y)
@@ -44,13 +46,14 @@ end
 def dfs(board)
   9.times.each do |i|
     9.times.each do |j|
-      next unless board[i][j] == '.'
-      '123456789'.each_char do |c|
-        board[i][j] = c
-        return true if board_valid?(board, i, j) && dfs(board)
-        board[i][j] = '.'
+      if board[i][j] == '.'
+        '123456789'.each_char do |c|
+          board[i][j] = c
+          return true if board_valid?(board, i, j) && dfs(board)
+          board[i][j] = '.'
+        end
+        return false
       end
-      return false
     end
   end
   true
