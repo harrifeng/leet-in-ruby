@@ -22,7 +22,7 @@ def my_atoi(str)
   str.length.times do |i|
     if i.zero? && ['-', '+'].include?(str[i])
       sign = -1 if str[i] == '-'
-    elsif ('0'.ord..'9'.ord).cover?(str[i].ord)
+    elsif str[i] =~ /[0-9]/
       ret = ret * 10 + str[i].to_i
 
       return imin if ret * sign <= imin
