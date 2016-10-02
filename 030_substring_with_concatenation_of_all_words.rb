@@ -12,29 +12,24 @@ end
 # @param {String} s
 # @param {String[]} words
 # @return {Integer[]}
-def find_substring(str, words)
-  had_words = {}
-  words.each do |word|
-    had_words[word] += 1 if had_words.include?(word)
-    had_words[word] = 1 unless had_words.include?(word)
-  end
+def find_substring(s, words)
+  return [] if words.length.zero?
+  had_word = words.group_by { |v| v }
 
-  ret = []
+  arr_len = words.length
   word_len = words[0].length
-  word_num = words.length
-  (str.length + 1 - word_len * word_num).times do |i|
+  ret = []
+  0.upto(s.length - arr_len * word_len) do |i|
     curr = {}
     j = 0
-    while j < word_num
-      word = str[i + j * word_len, word_len]
-      break unless had_words.include?(word)
-      curr[word] += 1 if curr.include?(word)
-      curr[word] = 1  unless curr.include?(word)
-
-      break if curr[word] > had_words[word]
+    while j < arr_len
+      word = s[i + j * word_len, word_len]
+      break unless had_word.include?(word)
+      curr[word] = (curr[word] || 0)  + 1
+      break if curr[word] > had_word[word].length
       j += 1
     end
-    ret.push(i) if j == word_num
+    ret.push(i) if j == arr_len
   end
   ret
 end
