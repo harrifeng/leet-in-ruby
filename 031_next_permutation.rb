@@ -17,17 +17,28 @@ class MyTest < Minitest::Test
     r3 = [1, 2, 3]
     next_permutation(n3)
     assert_equal(r3, n3)
+
+    n4 = [1, 5, 1]
+    r4 = [5, 1, 1]
+    next_permutation(n4)
+    assert_equal(r4, n4)
   end
 end
 
 def next_permutation(nums)
   return if nums.length < 2
   start = nums.length - 2
-  start -= 1 while nums[start] > nums[start + 1]
+  while start >= 0
+    break if nums[start] < nums[start + 1]
+    start -= 1
+  end
   return nums.reverse! if start == -1
 
   finish = nums.length - 1
-  finish -= 1 while nums[start] > nums[finish]
+  while finish > start
+    break if nums[finish] > nums[start]
+    finish -= 1
+  end
   # finish is the first that bigger than start
   nums[start], nums[finish] = nums[finish], nums[start]
 
