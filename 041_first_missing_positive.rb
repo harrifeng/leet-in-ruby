@@ -13,15 +13,14 @@ def first_missing_positive(nums)
     if nums[i] < 1 || nums[i] > nums.length || nums[i] == i + 1
       i += 1
     else
-      val = nums[i]
-      if nums[val - 1] == val
+      target_pos = nums[i] - 1
+      if nums[target_pos] == target_pos + 1
         i += 1
         next
       end
-      nums[val - 1], nums[i] = nums[i], nums[val - 1]
+      nums[i], nums[target_pos] = nums[target_pos], nums[i]
     end
   end
-
   nums.length.times do |j|
     return j + 1 if nums[j] != j + 1
   end
