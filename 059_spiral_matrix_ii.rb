@@ -10,18 +10,16 @@ end
 # @param {Integer} n
 # @return {Integer[][]}
 def generate_matrix(n)
-  helper(n, 0)
+  helper_059(n, 0)
 end
 
-def helper(n, count)
-  return [[]] if n.zero?
+def helper_059(n, count)
+  return [] if n.zero?
   return [[count + 1]] if n == 1
 
   matrix = Array.new(n) { Array.new(n, 0) }
 
-  matrix[0][0...-1] = matrix[0][0...-1].map do
-    count += 1
-  end
+  matrix[0].map!.with_index {|v, i| (i == matrix[0].length-1) ? v : (count += 1) }
 
   matrix[0...-1].map do |line|
     count += 1
@@ -38,8 +36,7 @@ def helper(n, count)
     line
   end
 
-  inner = helper(n - 2, count)
-  return matrix if inner == [[]]
+  inner = helper_059(n - 2, count)
   n.times do |i|
     n.times do |j|
       matrix[i][j] = inner[i - 1][j - 1] if matrix[i][j].zero?
