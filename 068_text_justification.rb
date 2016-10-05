@@ -32,12 +32,10 @@ def full_justify(words, max_width)
         ret.push(cur.join(' ' * every_spaces))
       end
       cur = []
-      cur.push(word)
-      cur_char_length = word.length
-    else
-      cur.push(word)
-      cur_char_length += word.length
+      cur_char_length = 0
     end
+    cur.push(word)
+    cur_char_length += word.length
   end
   ret.push(fill_to_max(cur.join(' '), max_width))
   ret
