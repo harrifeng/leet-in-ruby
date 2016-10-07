@@ -7,7 +7,6 @@ class TreeNode
     @right = nil
   end
 
-
   def self.get_tree_from_array(arr)
     return nil if arr.length.zero?
     arr.reverse!
@@ -16,21 +15,20 @@ class TreeNode
     queue = []
     queue.push(root)
 
-    while !queue.empty?
+    until queue.empty?
       cur = queue.shift
-      if arr.length > 0
+      unless arr.empty?
         lnode = arr.pop
         if lnode != '#'
           cur.left = TreeNode.new(lnode)
           queue.push cur.left
         end
       end
-      if arr.length > 0
-        rnode = arr.pop
-        if rnode != '#'
-          cur.right = TreeNode.new(rnode)
-          queue.push cur.right
-        end
+      next if arr.empty?
+      rnode = arr.pop
+      if rnode != '#'
+        cur.right = TreeNode.new(rnode)
+        queue.push cur.right
       end
     end
     root
@@ -38,9 +36,8 @@ class TreeNode
 
   def self.two_tr_equal(t1, t2)
     return true if t1.nil? && t2.nil?
-    return false if t1.nil? && !t2.nil?
-    return false if !t1.nil? && t2.nil?
+    return false if t1.nil? || t2.nil?
     return false if t1.val != t2.val
-    return two_tr_equal(t1.left, t2.left) && two_tr_equal(t1.right, t2.right)
+    two_tr_equal(t1.left, t2.left) && two_tr_equal(t1.right, t2.right)
   end
 end
