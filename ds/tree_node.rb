@@ -35,4 +35,12 @@ class TreeNode
     end
     root
   end
+
+  def self.two_tr_equal(t1, t2)
+    return true if t1.nil? && t2.nil?
+    return false if t1.nil? && !t2.nil?
+    return false if !t1.nil? && t2.nil?
+    return false if t1.val != t2.val
+    return two_tr_equal(t1.left, t2.left) && two_tr_equal(t1.right, t2.right)
+  end
 end
