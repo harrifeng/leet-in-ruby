@@ -3,7 +3,7 @@ require_relative 'ds/list_node'
 
 # Test for solution
 class MyTest < Minitest::Test
-  def test_leet_002
+  def test_leet_021
     lna1 = ListNode.get_ln_from_array([2, 4, 16])
     lna2 = ListNode.get_ln_from_array([1, 14, 15])
     exp_a = ListNode.get_ln_from_array([1, 2, 4, 14, 15, 16])
