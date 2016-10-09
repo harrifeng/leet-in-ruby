@@ -11,14 +11,16 @@ end
 # @param {String} s
 # @return {Integer}
 def length_of_longest_substring(s)
-  have = {}
+  had = {}
   start = 0
-  max_len = 0
+  maxv = 0
 
-  s.length.times do |i|
-    start = [start, have[s[i]] + 1].max if have.include?(s[i])
-    max_len = [max_len, i - start + 1].max
-    have[s[i]] = i
+  s.chars.each_with_index do |c, i|
+    if had.include?(c)
+      start = [start, had[c] + 1].max
+    end
+    maxv = [maxv, i  - start + 1].max
+    had[c] = i
   end
-  max_len
+  maxv
 end
