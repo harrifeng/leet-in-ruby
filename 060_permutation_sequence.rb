@@ -11,17 +11,17 @@ end
 # @param {Integer} k
 # @return {String}
 def get_permutation(n, k)
-  total = (1..n).reduce(:*)
-  str = (1..n).map(&:to_s)
+  nums = (1..n).to_a
+  group = (1..n).reduce(:*)
+  ret = ''
 
   k -= 1
-  ret = ''
   n.downto(1) do |i|
-    total /= i
-    pos = k / total
-    ret += str[pos]
-    str.delete_at pos
-    k -= pos * total
+    group /= i
+    pos = k / group
+    ret += nums[pos].to_s
+    nums.delete_at(pos)
+    k -= pos * group
   end
   ret
 end
