@@ -22,7 +22,7 @@ def remove_nth_from_end(head, n)
   until fast.next.nil?
     fast = fast.next
     slow = slow.next
-    slow.next = slow.next.next
   end
+  slow.next = slow.next.next
   dummy.next
 end
