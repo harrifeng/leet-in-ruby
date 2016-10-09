@@ -16,13 +16,14 @@ def remove_nth_from_end(head, n)
   dummy.next = head
 
   fast = dummy
+  n.times { fast = fast.next }
   slow = dummy
 
-  n.times { fast = fast.next }
   until fast.next.nil?
     fast = fast.next
     slow = slow.next
-    slow.next = slow.next.next
   end
+
+  slow.next = slow.next.next
   dummy.next
 end
