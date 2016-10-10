@@ -11,12 +11,13 @@ class MyTest < Minitest::Test
 end
 
 def search_insert(nums, target)
+  return 0 if nums.length.zero?
+
   front = 0
   back = nums.length - 1
 
   while front <= back
     mid = (front + back) / 2
-
     return mid if nums[mid] == target
     if nums[mid] < target
       front = mid + 1
