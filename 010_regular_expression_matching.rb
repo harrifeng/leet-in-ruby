@@ -14,22 +14,23 @@ class MyTest < Minitest::Test
 end
 
 def is_match(s, p)
-  dp = Array.new(s.length + 1) { Array.new(p.length + 1, false) }
+  slen = s.length
+  plen = p.length
+
+  dp = Array.new(slen + 1) { Array.new(plen + 1, false) }
   dp[0][0] = true
 
-  2.upto(p.length) do |i|
-    dp[0][i] = dp[0][i - 2] if p[i - 1] == '*'
-  end
+  2.upto(plen) { |j| dp[0][j] = dp[0][j - 2] if p[j - 1] == '*' }
 
-  1.upto(s.length) do |i|
-    1.upto(p.length) do |j|
-      if p[j - 1] == '*'
+  1.upto(slen) do |i|
+    1.upto(plen) do |j|
+      if '*' == p[j - 1]
         dp[i][j] = dp[i][j - 1] || dp[i][j - 2] ||
-                   (dp[i - 1][j] && (s[i - 1] == p[j - 2] || p[j - 2] == '.'))
+                   (dp[i - 1][j] && (s[i - 1] == p[j - 2] || '.' == p[j - 2]))
       else
-        dp[i][j] = dp[i - 1][j - 1] && (s[i - 1] == p[j - 1] || p[j - 1] == '.')
+        dp[i][j] = dp[i - 1][j - 1] && (s[i - 1] == p[j - 1] || '.' == p[j - 1])
       end
     end
   end
-  dp[s.length][p.length]
+  dp[slen][plen]
 end
