@@ -17,28 +17,24 @@ end
 def merge_k_lists(lists)
   return nil if lists.length.zero?
   return lists[0] if lists.length == 1
-
-  merge_two_lists(merge_k_lists(lists[0...lists.length / 2]),
-                  merge_k_lists(lists[lists.length / 2..lists.length]))
+  helper_023(merge_k_lists(lists.take(lists.length / 2)),
+             merge_k_lists(lists.drop(lists.length / 2)))
 end
 
-def merge_two_lists(l1, l2)
+def helper_023(l1, l2)
   dummy = ListNode.new(-1)
-  tmp = dummy
-
+  cur = dummy
   while !l1.nil? && !l2.nil?
     if l1.val < l2.val
-      dummy.next = ListNode.new(l1.val)
+      cur.next = l1
       l1 = l1.next
     else
-      dummy.next = ListNode.new(l2.val)
+      cur.next = l2
       l2 = l2.next
     end
-    dummy = dummy.next
+    cur = cur.next
   end
-
-  dummy.next = l1 unless l1.nil?
-  dummy.next = l2 unless l2.nil?
-
-  tmp.next
+  cur.next = l1 unless l1.nil?
+  cur.next = l2 unless l2.nil?
+  dummy.next
 end
