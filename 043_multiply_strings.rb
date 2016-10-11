@@ -13,11 +13,11 @@ end
 # @return {String}
 def multiply(num1, num2)
   ret = 0
-  num1.split('').reverse_each.with_index do |c_i, i|
-    num_i = c_i.to_i * (10**i)
-    num2.split('').reverse_each.with_index do |c_j, j|
-      num_j = c_j.to_i * (10**j)
-      ret += num_i * num_j
+  num1.chars.reverse.each_with_index do |c_i, i|
+    int_i = c_i.to_i * (10**i)
+    num2.chars.reverse.each_with_index do |c_j, j|
+      int_j = c_j.to_i * (10**j)
+      ret += int_i * int_j
     end
   end
   ret.to_s
