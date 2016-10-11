@@ -3,7 +3,7 @@ require_relative 'ds/tree_node'
 
 # MiniTest class
 class MyTest < Minitest::Test
-  def test_leet_100
+  def test_leet_101
     assert is_symmetric(TreeNode.get_tree_from_array([1, 2, 2, 3, 4, 4, 3]))
     assert !is_symmetric(TreeNode.get_tree_from_array([1, 2, 2, '#',
                                                        3, '#', 3]))
