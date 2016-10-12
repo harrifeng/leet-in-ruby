@@ -35,6 +35,8 @@ task :rand do
     f.write(function[-1])
   end
 
+  puts %x[git log -1 -- #{rand_file}]
+  puts '<----------------------------------------------->'
   puts "Please finish #{rand_file}"
 end
 
