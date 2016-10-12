@@ -29,14 +29,28 @@ task :rand do
   end
 
   File.open(rand_file, 'w') do |f|
-    f.write(question)
     f.write(function[0])
     f.write("\n")
     f.write(function[-1])
+
+    10.times { f.write("\n") }
+    f.write(question)
   end
 
-  puts %x[git log -1 -- #{rand_file}]
-  puts '<----------------------------------------------->'
+  puts ''
+  puts "Please finish #{rand_file}"
+  puts ''
+  puts '              Question                           '
+  puts '-------------------------------------------------'
+  puts `cat txt/#{rand_file.slice(0, 3)}.txt`
+  puts '-------------------------------------------------'
+  puts ''
+  puts ''
+  puts '              Last Commit                        '
+  puts '-------------------------------------------------'
+  puts `git log -1 -- #{rand_file}`
+  puts ''
+  puts ''
   puts "Please finish #{rand_file}"
 end
 
