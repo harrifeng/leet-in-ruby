@@ -15,13 +15,18 @@ task :rand do
 
   question = ''
   function = []
+  function_para = []
 
   File.open(rand_file, 'r') do |f|
     start = false
+    start_para = false
     while line = f.gets
       start = true if line =~ /^def/
+      start_para = true if line =~ /\# @/
       if start
         function.push line
+      elsif start_para
+        function_para.push line
       else
         question += line
       end
@@ -29,12 +34,12 @@ task :rand do
   end
 
   File.open(rand_file, 'w') do |f|
+    f.write(question)
+    80.times { f.write("\n") }
+    f.write(function_para.join(''))
     f.write(function[0])
     f.write("\n")
     f.write(function[-1])
-
-    10.times { f.write("\n") }
-    f.write(question)
   end
 
   puts ''
