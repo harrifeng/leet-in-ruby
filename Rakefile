@@ -38,4 +38,16 @@ task :rand do
   puts "Please finish #{rand_file}"
 end
 
+desc 'rename text'
+task :rename do
+  py_files = Dir['txt/[0-9]*.py']
+  py_files.map! do |p|
+    [p, p.slice(0, 7) + ".txt"]
+  end
+  py_files.each do |p|
+    %x[mv #{p[0]} #{p[1]}]
+  end
+end
+
+
 task default: :test
