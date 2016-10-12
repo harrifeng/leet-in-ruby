@@ -53,7 +53,7 @@ end
 desc 'pick text'
 task :pick do
   txt_files = Dir['txt/[0-9]*.txt']
-  txt_files[11..11].each do |txt|
+  txt_files.each do |txt|
     question = []
     File.open(txt, 'r') do |f|
       start = 0
