@@ -16,7 +16,6 @@ end
 # @return {Boolean}
 def is_same_tree(p, q)
   return true if p.nil? && q.nil?
-  return false if p.nil? || q.nil? # not all nil here
-  (p.val == q.val) && is_same_tree(p.left, q.left) &&
-    is_same_tree(p.right, q.right)
+  return false if p.nil? || q.nil?
+  return (p.val == q.val) && is_same_tree(p.left, q.left) && is_same_tree(p.right, q.right)
 end
