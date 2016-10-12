@@ -8,6 +8,7 @@ class MyTest < Minitest::Test
 end
 
 def letter_combinations(digits)
+  return [] if digits.length.zero?
   ret = []
   helper_017(digits, 0, '', ret)
   ret
