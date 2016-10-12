@@ -50,4 +50,26 @@ task :rename do
 end
 
 
+desc 'pick text'
+task :pick do
+  txt_files = Dir['txt/[0-9]*.txt']
+  txt_files[11..11].each do |txt|
+    question = []
+    File.open(txt, 'r') do |f|
+      start = 0
+      while line = f.gets
+        start += 1 if (line.length) == 4 && (line.chars == ["\"", "\"", "\"", "\n"])
+        question.push(line) if start == 1
+      end
+    end
+
+
+    File.open(txt, 'w') do |f|
+      f.write(question.drop(1).join(''))
+    end
+  end
+
+end
+
+
 task default: :test
