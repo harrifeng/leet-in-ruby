@@ -15,18 +15,18 @@ end
 def remove_duplicates_ii(nums)
   return 0 if nums.length.zero?
   pre = 0
-  size = 1
+  cnt = 1
   1.upto(nums.length - 1) do |i|
     if nums[i] != nums[i - 1]
       pre += 1
       nums[pre] = nums[i]
-      size = 1
+      cnt = 1
     else
-      if size == 1
+      if cnt == 1
         pre += 1
         nums[pre] = nums[i]
       end
-      size += 1
+      cnt += 1
     end
   end
   pre + 1
