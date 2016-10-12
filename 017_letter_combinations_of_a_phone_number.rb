@@ -1,21 +1,19 @@
 require 'minitest/autorun'
-
 # Test for solution
 class MyTest < Minitest::Test
   def test_leet_017
     assert_equal %w(ad ae af bd be bf cd ce cf), letter_combinations('23')
+    assert_equal [], letter_combinations('')
   end
 end
 
 def letter_combinations(digits)
-  return 0 if digits.length.zero?
-
   ret = []
-  helper(digits, 0, '', ret)
+  helper_017(digits, 0, '', ret)
   ret
 end
 
-PHONE_NUMBER = {
+PHONE_NUMS = {
   '2' => 'abc',
   '3' => 'def',
   '4' => 'ghi',
@@ -26,14 +24,13 @@ PHONE_NUMBER = {
   '9' => 'wxyz'
 }.freeze
 
-def helper(dig, level, tmp, ret)
-  if dig.length == level
-    ret.push(tmp.dup)
+def helper_017(digits, level, tmp, ret)
+  if level == digits.length
+    ret.push tmp.dup
     return
   end
 
-  cur = PHONE_NUMBER[dig[level]]
-  cur.each_char do |c|
-    helper(dig, level + 1, tmp + c, ret)
+  PHONE_NUMS[digits[level]].each_char do |c|
+    helper_017(digits, level + 1, tmp + c, ret)
   end
 end
