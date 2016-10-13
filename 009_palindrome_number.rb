@@ -14,17 +14,20 @@ end
 # @return {Boolean}
 def is_palindrome(x)
   return false if x < 0
+
+  size = 1
   tmp = x
-  group = 1
-  while tmp >= 10
-    group *= 10
+
+  while tmp > 9
+    size  *= 10
     tmp /= 10
   end
 
-  while group >= 10
-    return false if x / group != x % 10
-    x = x % group / 10
-    group /= 100
+  while size > 9
+    return false if x / size != x % 10
+    x = x % size / 10
+    size /= 100
   end
+
   true
 end
