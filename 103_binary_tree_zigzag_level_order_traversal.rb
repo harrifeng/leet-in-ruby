@@ -16,15 +16,8 @@ end
 # @return {Integer[][]}
 def zigzag_level_order(root)
   ret = helper_013(root)
-  ret.each_with_index.map do |c, i|
-    if i.odd?
-      c.reverse!
-    else
-      c
-    end
-  end
+  ret.each_with_index.map { |c, i| i.odd? ? c.reverse : c }
 end
-
 
 def helper_013(root)
   return [] if root.nil?
