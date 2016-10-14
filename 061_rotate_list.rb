@@ -20,22 +20,23 @@ end
 # @param {Integer} k
 # @return {ListNode}
 def rotate_right(head, k)
-  return head if head.nil? || head.next.nil?
-
-  tmp = head
+  return head if k.zero? || head.nil? || head.next.nil?
   len = 1
-  until tmp.next.nil?
+  cur = head
+  until cur.next.nil?
+    cur = cur.next
     len += 1
-    tmp = tmp.next
   end
-  tmp.next = head # circle
 
-  size = len - k % len
+  cur.next = head # circle
+
+  num = len - k % len
 
   dummy = ListNode.new(-1)
   dummy.next = head
 
-  size.times { dummy = dummy.next }
+  num.times { dummy = dummy.next }
+
   ret = dummy.next
   dummy.next = nil
   ret
