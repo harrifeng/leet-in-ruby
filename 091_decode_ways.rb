@@ -22,25 +22,20 @@ end
 # @return {Integer}
 def num_decodings(s)
   return 0 if s.length.zero? || s[0] == '0'
-
-  dp = [0] * (s.length + 1)
+  dp = Array.new(s.length + 1, 0)
   dp[0] = 1
   dp[1] = 1
 
   2.upto(s.length) do |i|
     if s[i - 1] == '0'
-      dp[i] = if (s[i - 2] == '1') || (s[i - 2] == '2')
-                dp[i - 2]
-              else
-                0
-              end
+      dp[i] = %w(1 2).include?(s[i - 2]) ? dp[i - 2] : 0
     else
-      dp[i] = if s[i - 2] != '0' && s[i - 2...i].to_i > 10 && s[i - 2...i].to_i <= 26
-                dp[i - 2] + dp[i - 1]
+      dp[i] = if s[i - 2] != '0' && s.slice(i - 2, 2).to_i <= 26
+                (dp[i - 1] + dp[i - 2])
               else
                 dp[i - 1]
               end
     end
   end
-  dp[s.length]
+  dp[-1]
 end
