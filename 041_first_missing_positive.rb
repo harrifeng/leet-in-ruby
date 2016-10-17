@@ -10,19 +10,18 @@ end
 def first_missing_positive(nums)
   i = 0
   while i < nums.length
-    if nums[i] < 1 || nums[i] > nums.length || nums[i] == i + 1
+    if nums[i] < 1 || nums[i] > nums.length || i + 1 == nums[i]
       i += 1
     else
-      target_pos = nums[i] - 1
-      if nums[target_pos] == target_pos + 1
+      tmp = nums[i]
+      if nums[tmp - 1] == tmp
         i += 1
         next
       end
-      nums[i], nums[target_pos] = nums[target_pos], nums[i]
+      nums[i], nums[tmp - 1] = nums[tmp - 1], nums[i]
     end
   end
-  nums.length.times do |j|
-    return j + 1 if nums[j] != j + 1
-  end
+
+  nums.each { |j| return j + 1 if nums[j] != j + 1 }
   nums.length + 1
 end
