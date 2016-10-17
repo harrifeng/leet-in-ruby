@@ -20,7 +20,7 @@ def build_tree(preorder, inorder)
   left_len = inorder.index(preorder[0])
   right_len = inorder.length - 1 - left_len
 
-  root.left = build_tree(preorder[1, left_len], inorder[0, left_len])
+  root.left = build_tree(preorder[1, left_len], inorder.first(left_len))
   root.right = build_tree(preorder.last(right_len), inorder.last(right_len))
   root
 end
