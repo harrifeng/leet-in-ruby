@@ -11,23 +11,23 @@ class MyTest < Minitest::Test
   end
 end
 
+
 def merge_two_lists(l1, l2)
   dummy = ListNode.new(-1)
-  tmp = dummy
+  cur = dummy
 
   while !l1.nil? && !l2.nil?
     if l1.val < l2.val
-      dummy.next = ListNode.new(l1.val)
+      cur.next = l1
       l1 = l1.next
     else
-      dummy.next = ListNode.new(l2.val)
+      cur.next = l2
       l2 = l2.next
     end
-    dummy = dummy.next
+    cur = cur.next
   end
 
-  dummy.next = l1 unless l1.nil?
-  dummy.next = l2 unless l2.nil?
-
-  tmp.next
+  cur.next = l1 unless l1.nil?
+  cur.next = l2 unless l2.nil?
+  dummy.next
 end
