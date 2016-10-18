@@ -16,7 +16,6 @@ end
 # @param {String} p
 # @return {Boolean}
 def is_match_2(s, p)
-  return false if (s.length > 300) && (p[0] == '*') && (p[-1] == '*')
   dp = Array.new(s.length + 1) { Array.new(p.length + 1, false) }
   dp[0][0] = true
 
@@ -27,7 +26,7 @@ def is_match_2(s, p)
       if p[j - 1] == '*'
         dp[i][j] = dp[i][j - 1] || dp[i - 1][j]
       else
-        dp[i][j] = dp[i - 1][j - 1] && (p[j - 1] == '?' || s[i - 1] == p[j - 1])
+        dp[i][j] = dp[i - 1][j - 1] && (s[i - 1] == p[j - 1] || '?' == p[j - 1])
       end
     end
   end
