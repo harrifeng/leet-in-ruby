@@ -10,14 +10,14 @@ class MyTest < Minitest::Test
 end
 
 def remove_duplicates(nums)
-  return nums.length if nums.length < 2
-  front = 0
+  return 0 if nums.length.zero?
 
+  pre = 0
   1.upto(nums.length - 1) do |i|
-    if nums[i] != nums[front]
-      front += 1
-      nums[front] = nums[i]
+    if nums[i] != nums[i - 1]
+      pre += 1
+      nums[pre] = nums[i]
     end
   end
-  front + 1
+  pre + 1
 end
