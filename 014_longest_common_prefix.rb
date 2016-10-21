@@ -8,14 +8,15 @@ class MyTest < Minitest::Test
   end
 end
 
+# @param {String[]} strs
+# @return {String}
 def longest_common_prefix(strs)
   return '' if strs.length.zero?
-
-  ret = strs[0]
-  ret.length.times do |i|
-    strs[1...strs.length].each do |str|
-      return ret[0...i] if (str.length == i) || (str[i] != ret[i])
+  pre = strs[0]
+  pre.length.times do |i|
+    strs.drop(1).each do |str|
+      return pre[0...i] if str.length == i || str[i] != pre[i]
     end
   end
-  ret
+  pre
 end
