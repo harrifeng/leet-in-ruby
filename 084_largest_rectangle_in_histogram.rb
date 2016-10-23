@@ -11,21 +11,22 @@ end
 # @return {Integer}
 def largest_rectangle_area(heights)
   heights.push 0
-  stack = []
-  maxv = 0
   i = 0
+  maxv = 0
+  stack = []
+
   while i < heights.length
-    if stack.empty? || heights[i] >= heights[stack[-1]]
+    if stack.empty? || heights[i] > heights[stack[-1]]
       stack.push i
       i += 1
     else
-      index = stack.pop
+      cur_i = stack.pop
       width = if stack.empty?
                 i
               else
                 i - stack[-1] - 1
               end
-      maxv = [maxv, width * heights[index]].max
+      maxv = [maxv, width * heights[cur_i]].max
     end
   end
   maxv
