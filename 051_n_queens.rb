@@ -8,32 +8,38 @@ class MyTest < Minitest::Test
   end
 end
 
-def solve_n_queens_ii(n)
-  ret = []
-  helper_051(n, 0, [], ret)
-  ret
-end
-
-def queen_valid?(queen, row, col)
-  row.times do |i|
-    queen[0].length.times do |j|
-      return false if queen[i][j] == 'Q' &&
-                      (j == col || (row - i).abs == (col - j).abs)
+def is_valid?(board, x, y)
+  x.times do |i|
+    board[0].length do |j|
+      if board[i][j] == 'Q' && (j == y || (x - i).abs == (y-j).abs)
+        return false
+      end
     end
   end
   true
 end
 
-def helper_051(n, level, tmp, ret)
+
+def helper(n, level, tmp, ret)
   if level == n
-    ret.push(tmp.dup)
+    ret.push tmp.dup
     return
   end
+
   line = '.' * n
-  n.times do |i|
-    cur_line = line[0...i] + 'Q' + line[i + 1...n]
-    tmp.push(cur_line)
-    helper_051(n, level + 1, tmp, ret) if queen_valid?(tmp, level, i)
-    tmp.pop
+  level.upto(n-1) do |i|
+    cur = line[0...i] + 'Q' + line[i+1...line.length]
+    if is_valid?(tmp, level, i)
+      tmp.push cur
+      helper(n, level + 1, tmp, ret)
+      tmp.pop
+    end
   end
+end
+
+
+def solve_n_queens_ii(n)
+  ret = []
+  helper(n, 0, [], ret)
+  ret
 end
