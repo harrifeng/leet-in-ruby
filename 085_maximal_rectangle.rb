@@ -9,6 +9,13 @@ class MyTest < Minitest::Test
        %w(1 1 1 0),
        %w(0 1 0 0)]
     )
+
+    assert_equal 6, maximal_rectangle(
+      [%w(1 0 1 0 0),
+       %w(1 0 1 1 1),
+       %w(1 1 1 1 1),
+       %w(1 0 0 1 0)]
+    )
   end
 end
 
@@ -20,8 +27,8 @@ def maximal_rectangle(matrix)
   n = matrix[0].length
 
   maxv = 0
-  heights = [0] * n
 
+  heights = [0] * n
   m.times do |i|
     n.times do |j|
       if matrix[i][j] == '0'
@@ -37,21 +44,22 @@ end
 
 def helper_085(heights)
   heights.push 0
+  stack = []
   i = 0
   maxv = 0
-  stack = []
+
   while i < heights.length
     if stack.empty? || heights[i] >= heights[stack[-1]]
-      stack.push i
+      stack.push(i)
       i += 1
     else
-      index = stack.pop
+      cur_i = stack.pop
       width = if stack.empty?
                 i
               else
                 i - stack[-1] - 1
               end
-      maxv = [maxv, width * heights[index]].max
+      maxv = [maxv, heights[cur_i] * width].max
     end
   end
   maxv
