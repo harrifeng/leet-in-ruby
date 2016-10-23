@@ -15,14 +15,14 @@ end
 def convert(s, num_rows)
   return s if num_rows <= 1
   ret = [''] * num_rows
-  group = 2 * num_rows - 2
+  g = 2 * num_rows - 2
 
-  s.length.times do |i|
-    cur = i % group
+  s.chars.each_with_index do |c, i|
+    cur = i % g
     if cur < num_rows
-      ret[cur] += s[i]
+      ret[cur] += c
     else
-      ret[group - cur] += s[i]
+      ret[g - cur] += c
     end
   end
   ret.join('')
