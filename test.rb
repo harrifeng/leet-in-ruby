@@ -16,8 +16,45 @@ def get_current_branch
   g.branches.map{|b| b if b.current }.compact[0]
 end
 
-puts get_current_branch
-puts get_commit_branch_list(get_file_last_commit('Gemfile'))
+
+def get_commits_since_depart_from_master
+  g = Git.open('.')
+  # cur_branch = g.branches.map{|b| b if b.current }.compact[0].to_s
+  cur = g.branches.map{|b| b if b.current }.compact[0]
+  master = g.branches["master"]
+  starter = `git merge-base #{cur.gcommit.sha} #{master.gcommit.sha}`
+  starter.chop!
+  arr = g.log.between(starter, 'HEAD')
+end
+
+# p get_commits_since_depart_from_master.size
+
+def get_diff_file_list
+  g = Git.open('.')
+  cur = g.branches.map{|b| b if b.current }.compact[0]
+  master = g.branches["master"]
+  starter = `git merge-base #{cur.gcommit.sha} #{master.gcommit.sha}`
+  starter.chop!
+
+  g.gtree(starter).diff('HEAD').name_status.keys
+end
+p get_diff_file_list
+
+
+
+# p cur = get_current_branch
+
+# g = Git.open('.')
+# arr = g.log.between('HEAD~6', 'HEAD')
+# # arr = g.log.since('2 weeks ago')
+#
+# p arr.class
+# arr.each do |i|
+#   p i.sha
+# end
+# p arr.size
+# puts get_current_branch
+# puts get_commit_branch_list(get_file_last_commit('Gemfile'))
 
 # g = Git.open('.', :log => Logger.new(STDOUT))
 # g = Git.open('.')

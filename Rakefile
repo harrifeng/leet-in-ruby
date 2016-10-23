@@ -20,19 +20,31 @@ def get_current_branch
   g.branches.map{|b| b if b.current }.compact[0].to_s
 end
 
+def get_diff_file_list
+  g = Git.open('.')
+  cur = g.branches.map{|b| b if b.current }.compact[0]
+  master = g.branches["master"]
+  starter = `git merge-base #{cur.gcommit.sha} #{master.gcommit.sha}`
+  starter.chop!
+
+  g.gtree(starter).diff('HEAD').name_status.keys
+end
+
 desc 'random question'
 task :rand do
   rb_raw_files = Dir['[0-9]*.rb']
+  change_files = get_diff_file_list
   rb_files = rb_raw_files.map { |r|
-    file_in_branches = get_commit_branch_list(get_file_last_commit(r))
-    if file_in_branches.include?(get_current_branch) && !file_in_branches.include?('master')
-      [r.slice(0, 3).to_i, r]
-    else
+    if change_files.include?(r)
       nil
+    else
+      [r.slice(0, 3).to_i, r]
     end
   }.compact
 
-  puts "Still have #{rb_files.length} / #{rb_raw_files} to finish"
+  puts "==============================================================================="
+  puts "Still have #{rb_files.length} / #{rb_raw_files.length} to finish this round! Fighting!!"
+  puts "==============================================================================="
 
   rand_file = rb_files[(rand * rb_files.size).to_i][1]
 
@@ -66,7 +78,6 @@ task :rand do
   end
 
   puts ''
-  puts "Please finish #{rand_file}"
   puts ''
   puts '              Question                           '
   puts '-------------------------------------------------'
@@ -79,7 +90,7 @@ task :rand do
   puts `git log -1 -- #{rand_file}`
   puts ''
   puts ''
-  puts "Please finish #{rand_file}"
+  puts "Please finish [#{rand_file}]"
 end
 
 task default: :test
