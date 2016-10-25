@@ -16,20 +16,20 @@ class MyTest < Minitest::Test
   end
 end
 
+# @param {Integer} n
+# @return {String}
 def count_and_say(n)
   return '1' if n == 1
+  old_s = count_and_say(n - 1) + '$'
 
-  s = count_and_say(n - 1) + '$'
-
-  cnt = 1
+  count = 1
   ret = ''
-  (s.length - 1).times do |i|
-    if s[i] == s[i + 1]
-      cnt += 1
+  (old_s.length - 1).times do |i|
+    if old_s[i] == old_s[i + 1]
+      count += 1
     else
-      ret += cnt.to_s
-      ret += s[i].to_s
-      cnt = 1
+      ret += "#{count}#{old_s[i]}"
+      count = 1
     end
   end
   ret
