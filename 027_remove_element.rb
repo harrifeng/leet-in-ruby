@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 
 # Test for solution
@@ -11,10 +12,13 @@ class MyTest < Minitest::Test
   end
 end
 
+# @param {Integer[]} nums
+# @param {Integer} val
+# @return {Integer}
 def remove_element(nums, val)
   pre = -1
   nums.length.times do |i|
-    if val != nums[i]
+    if nums[i] != val
       pre += 1
       nums[pre] = nums[i]
     end
