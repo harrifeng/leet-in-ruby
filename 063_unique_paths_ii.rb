@@ -1,9 +1,11 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 
 # MiniTest class
 class MyTest < Minitest::Test
   def test_leet_063
-    assert_equal 2, unique_paths_with_obstacles([[0, 0, 0], [0, 1, 0], [0, 0, 0]])
+    assert_equal 2, unique_paths_with_obstacles([[0, 0, 0], [0, 1, 0],
+                                                 [0, 0, 0]])
   end
 end
 
@@ -26,12 +28,12 @@ def unique_paths_with_obstacles(obstacle_grid)
     dp[0][j] = 1
   end
 
-  1.upto(m - 1) do |i|
-    1.upto(n - 1) do |j|
+  (1...m).each do |i|
+    (1...n).each do |j|
       dp[i][j] = if obstacle_grid[i][j] == 1
                    0
                  else
-                   dp[i][j - 1] + dp[i - 1][j]
+                   dp[i - 1][j] + dp[i][j - 1]
                  end
     end
   end
