@@ -12,19 +12,8 @@ end
 # @param {TreeNode} root
 # @return {Integer[]}
 def inorder_traversal(root)
-  stack = []
-  cur = root
-  ret = []
-
-  while !cur.nil? || !stack.empty?
-    if !cur.nil?
-      stack.push cur
-      cur = cur.left
-    elsif !stack.empty?
-      cur = stack.pop
-      ret.push(cur.val)
-      cur = cur.right
-    end
-  end
-  ret
+  return [] if root.nil?
+  ret = inorder_traversal(root.left)
+  ret.push(root.val)
+  ret + inorder_traversal(root.right)
 end
