@@ -1,23 +1,15 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 require_relative 'ds/interval'
 
 # MiniTest class
 class MyTest < Minitest::Test
-  def assert_interval_array_equal(a1, a2)
-    assert_equal a1.length, a2.length
-
-    a1.length.times do |i|
-      assert_equal a1[i].start, a2[i].start
-      assert_equal a1[i].end, a2[i].end
-    end
-  end
-
   def test_leet_056
     a1 = Interval.get_interval_list_from_listlist(
       [[1, 3], [2, 6], [8, 10], [15, 18]]
     )
     r1 = Interval.get_interval_list_from_listlist([[1, 6], [8, 10], [15, 18]])
-    assert_interval_array_equal(r1, merge(a1))
+    assert Interval.two_intv_equal(r1, merge(a1))
   end
 end
 
