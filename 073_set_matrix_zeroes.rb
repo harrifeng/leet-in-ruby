@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 
 # MiniTest class
@@ -30,13 +31,12 @@ def set_zeroes(matrix)
   first_row_zero = true if matrix[0].reduce(:*).zero?
   first_col_zero = true if matrix.map { |line| line[0] }.reduce(:*).zero?
 
-  len = matrix.length
   1.upto(matrix.length - 1) do |i|
     1.upto(matrix[0].length - 1) do |j|
       if matrix[i][j].zero?
         matrix[0][j] = 0
         matrix[i][0] = 0
-        end
+      end
     end
   end
 
