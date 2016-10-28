@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 
 # MiniTest class
@@ -13,9 +14,11 @@ end
 def is_scramble(s1, s2)
   return false if s1.length != s2.length
   return false if s1.split('').sort != s2.split('').sort
+
   return true if s1.length <= 2
 
-  1.upto(s1.length - 1) do |i|
+  (1...s1.length).each do |i|
+    # swapped or not swapped
     return true if (is_scramble(s1[0...i], s2[0...i]) &&
                     is_scramble(s1[i...s1.length], s2[i...s2.length])) ||
                    (is_scramble(s1[0...i], s2[-i...s2.length]) &&
