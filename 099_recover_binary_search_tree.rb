@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 require_relative 'ds/tree_node'
 
@@ -14,21 +15,37 @@ end
 # @param {TreeNode} root
 # @return {Void} Do not return anything, modify root in-place instead.
 def recover_tree(root)
-  @n1 = nil
-  @n2 = nil
-  @prev = nil
-  helper_099(root)
-  @n1.val, @n2.val = @n2.val, @n1.val
+  broken = Array.new(2)
+  prev = nil
+  cur = root
+
+  until cur.nil?
+    if cur.left.nil?
+      detect(broken, prev, cur)
+      prev = cur
+      cur = cur.right
+    else
+      node = cur.left
+
+      node = node.right while !node.right.nil? && node.right != cur
+
+      if node.right.nil?
+        node.right = cur
+        cur = cur.left
+      else
+        detect(broken, prev, cur)
+        node.right = nil
+        prev = cur
+        cur = cur.right
+      end
+    end
+  end
+  broken[0].val, broken[1].val = broken[1].val, broken[0].val
 end
 
-def helper_099(root)
-  unless root.nil?
-    helper_099(root.left)
-    if !@prev.nil? && @prev.val > root.val
-      @n2 = root
-      @n1 = @prev if @n1.nil?
-    end
-    @prev = root
-    helper_099(root.right)
+def detect(broken, prev, cur)
+  if !prev.nil? && prev.val > cur.val
+    broken[0] = prev if broken[0].nil?
+    broken[1] = cur
   end
 end
