@@ -71,7 +71,11 @@ def pick_question_from_none_master_branch
   puts ''
   puts '              Question                           '
   puts '-------------------------------------------------'
-  puts `cat txt/#{rand_file.slice(0, 3)}.txt`
+  File.open("txt/#{rand_file.slice(0,3)}.txt", "r") do |file|
+    while line = file.gets
+      puts line
+    end
+  end
   puts '-------------------------------------------------'
   puts ''
   puts ''
