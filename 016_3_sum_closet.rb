@@ -1,16 +1,21 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 
 # Test for solution
 class MyTest < Minitest::Test
   def test_leet_016
     assert_equal 2, three_sum_closest([-1, 2, 1, -4], 1)
+    assert_equal 82, three_sum_closest([1, 2, 4, 8, 16, 32, 64, 128], 82)
   end
 end
 
+
+# @param {Integer[]} nums
+# @param {Integer} target
+# @return {Integer}
 def three_sum_closest(nums, target)
   nums.sort!
-  return 0 if nums.length < 3
-  minv = nums[0] + nums[1] + nums[2]
+  minv = nums.take(3).reduce(:+)
 
   (nums.length - 2).times do |i|
     front = i + 1
@@ -18,7 +23,6 @@ def three_sum_closest(nums, target)
 
     while front < back
       cnt = nums[i] + nums[front] + nums[back]
-
       minv = cnt if (cnt - target).abs < (minv - target).abs
 
       return cnt if cnt == target
