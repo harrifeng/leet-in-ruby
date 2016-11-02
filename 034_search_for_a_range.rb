@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 
 # MiniTest class
@@ -7,23 +8,27 @@ class MyTest < Minitest::Test
   end
 end
 
+
+# @param {Integer[]} nums
+# @param {Integer} target
+# @return {Integer[]}
 def search_range(nums, target)
-  high = -1
   low = -1
-  return [low, hight] if nums.length.zero?
+  high = -1
 
   front = 0
   back = nums.length - 1
 
   while front <= back
     mid = (front + back) / 2
-    if nums[mid] == target
+    if target == nums[mid]
       low = mid
+      # lower
       back = mid - 1
-    elsif nums[mid] < target
-      front = mid + 1
+    elsif target < nums[mid]
+      back = mid - 1
     else
-      back = mid - 1
+      front = mid + 1
     end
   end
 
@@ -32,14 +37,15 @@ def search_range(nums, target)
 
   while front <= back
     mid = (front + back) / 2
-    if nums[mid] == target
+    if target == nums[mid]
       high = mid
       front = mid + 1
-    elsif nums[mid] < target
-      front = mid + 1
-    else
+    elsif target < nums[mid]
       back = mid - 1
+    else
+      front = mid + 1
     end
   end
+
   [low, high]
 end
