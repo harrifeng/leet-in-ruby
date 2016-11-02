@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 
 # Test for solution
@@ -15,29 +16,32 @@ end
 # @param {String} s
 # @return {String}
 def longest_palindrome(s)
-  t = '^#' + s.split('').join('#') + '#%'
-  size = [0] * 3000
-  centeri = 0
-  righti = 0
-  maxp = 0
+  t = '^#' + s.split('').join('#') + '#^'
+  cnt = [0] * t.length
+  tmpi_c = 0
+  tmpi = 0
   maxi = 0
+  maxv = 0
 
   1.upto(t.length - 2) do |i|
-    start = 1
-    start = [righti - i, size[2 * centeri - i]].min if i < righti
+    cnt[i] = if i < tmpi
+               [cnt[2 * tmpi_c - i], tmpi - i].min
+             else
+               1
+             end
 
-    start += 1 while t[i + start] == t[i - start]
-    size[i] = start
+    cnt[i] += 1 while t[i + cnt[i]] == t[i - cnt[i]]
 
-    if size[i] + i > righti
-      righti = size[i] + i
-      centeri = i
+    if i + cnt[i] > tmpi
+      tmpi = i + cnt[i]
+      tmpi_c = i
     end
 
-    if maxp < size[i]
-      maxp = size[i]
+    if maxv < cnt[i]
+      maxv = cnt[i]
       maxi = i
     end
   end
-  s[maxi / 2 - maxp / 2, maxp - 1]
+
+  s[maxi / 2 - maxv / 2, maxv - 1]
 end
