@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 
 # Test for solution
@@ -16,7 +17,6 @@ end
 def str_str(haystack, needle)
   i = 0
   j = 0
-
   while i < haystack.length && j < needle.length
     if haystack[i] == needle[j]
       i += 1
@@ -26,7 +26,5 @@ def str_str(haystack, needle)
       j = 0
     end
   end
-
-  return i - j if j == needle.length
-  -1
+  j == needle.length ? (i - j) : -1
 end
