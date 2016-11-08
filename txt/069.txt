@@ -1,6 +1,5 @@
-Given two binary strings, return their sum (also a binary string).
+69. Sqrt(x)   QuestionEditorial Solution
+Difficulty: Medium
+Implement int sqrt(int x).
 
-For example,
-a = "11"
-b = "1"
-Return "100".
+Compute and return the square root of x.

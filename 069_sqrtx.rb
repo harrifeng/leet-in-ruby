@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 
 # MiniTest class
@@ -11,7 +12,6 @@ end
 # @param {Integer} x
 # @return {Integer}
 def my_sqrt(x)
-  return 0 if x.zero?
   front = 0
   back = x
 
