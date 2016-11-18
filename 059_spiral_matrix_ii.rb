@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'minitest/autorun'
 
 # MiniTest class
@@ -10,37 +11,43 @@ end
 # @param {Integer} n
 # @return {Integer[][]}
 def generate_matrix(n)
-  helper_059(n, 0)
-end
+  ret = Array.new(n) { Array.new(n, 0) }
 
-def helper_059(n, count)
-  return [] if n.zero?
-  return [[count + 1]] if n == 1
+  head_r = 0
+  tail_r = n - 1
+  head_c = 0
+  tail_c = n - 1
 
-  matrix = Array.new(n) { Array.new(n, 0) }
-
-  matrix[0].map!.with_index {|v, i| (i == matrix[0].length-1) ? v : (count += 1) }
-
-  matrix[0...-1].map do |line|
-    count += 1
-    line[-1] = count
-    line
-  end
-
-  tmp = matrix[-1][1..-1].reverse.map { count += 1 }
-  matrix[-1][1..-1] = tmp.reverse
-
-  matrix[1..-1].reverse.map do |line|
-    count += 1
-    line[0] = count
-    line
-  end
-
-  inner = helper_059(n - 2, count)
-  n.times do |i|
-    n.times do |j|
-      matrix[i][j] = inner[i - 1][j - 1] if matrix[i][j].zero?
+  cnt = 1
+  loop do
+    head_c.upto(tail_c) do |col|
+      ret[head_r][col] = cnt
+      cnt += 1
     end
+    head_r += 1
+    break if head_r > tail_r
+
+    head_r.upto(tail_r) do |row|
+      ret[row][tail_c] = cnt
+      cnt += 1
+    end
+    tail_c -= 1
+    break if head_c > tail_c
+
+    tail_c.downto(head_c) do |col|
+      ret[tail_r][col] = cnt
+      cnt += 1
+    end
+    tail_r -= 1
+    break if head_r > tail_r
+
+    tail_r.downto(head_r) do |row|
+      ret[row][head_c] = cnt
+      cnt += 1
+    end
+    head_c += 1
+    break if head_c > tail_c
   end
-  matrix
+
+  ret
 end
