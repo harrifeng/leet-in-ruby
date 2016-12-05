@@ -9,30 +9,15 @@ class MyTest < Minitest::Test
 end
 
 def divide(dividend, divisor)
-  sign = if (dividend < 0) != (divisor < 0)
-           -1
-         else
-           1
-         end
+  is_neg = (dividend > 0) != (divisor > 0)
+
   a = dividend.abs
   b = divisor.abs
 
   ret = 0
-
-  while a >= b
-    c = b
-    i = 0
-    while a >= c
-      a -= c
-      ret += (1 << i)
-      i += 1
-      c = (c << 1)
-    end
+  while (a >= b) do
+    ret += 1
+    a -= b
   end
-
-  imin = -2**31
-  imax = 2**31 - 1
-  imax if ret * sign > imax
-  imin if ret * sign < imin
-  ret * sign
+  ret
 end
