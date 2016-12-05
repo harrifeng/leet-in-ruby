@@ -8,6 +8,9 @@ class MyTest < Minitest::Test
   end
 end
 
+# @param {Integer} dividend
+# @param {Integer} divisor
+# @return {Integer}
 def divide(dividend, divisor)
   is_neg = (dividend > 0) != (divisor > 0)
 
@@ -16,8 +19,29 @@ def divide(dividend, divisor)
 
   ret = 0
   while (a >= b) do
-    ret += 1
-    a -= b
+    # ret += 1
+    # a -= b
+    c = b
+    pos = 0
+    while (a >= c) do
+      a -= c
+      ret =  ret + (1 << pos)
+      pos += 1
+      c = (c << 1)
+    end
   end
-  ret
+
+  if is_neg
+    if ret > 2 ** 31 - 1
+      return -2 ** 31
+    else
+      ret * -1
+    end
+  else
+    if ret > 2 ** 31 - 1
+      return 2 ** 31 - 1
+    else
+      return ret
+    end
+  end
 end
